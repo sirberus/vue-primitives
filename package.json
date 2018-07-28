@@ -1,0 +1,14 @@
+{
+  "name": "vue-primitives",
+  "version": "1.0.0",
+  "description": "Flexible primitive component factory",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"!\" && exit 1"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "github.com/sirberus",
+  "license": "MIT"
+}
