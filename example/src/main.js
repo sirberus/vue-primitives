@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
-import VuePrimitives from '../../src/index.js'
+import VuePrimitives from 'vue-primitives'
 
 Vue.config.productionTip = false
 
