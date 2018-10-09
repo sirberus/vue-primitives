@@ -1,4 +1,4 @@
-export function createPrimitive(oldTag, newTag, bakeInClasses=[]) {
+export default function createPrimitive(oldTag, newTag, bakeInClasses=[]) {
   return {
     functional: true,
     name: newTag,
