@@ -7,13 +7,13 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "vue": "^2.5.16",
+    "vue": "^2.5.17",
     "vue-primitives": "^1.0.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-rc.5",
-    "@vue/cli-service": "^3.0.0-rc.5",
-    "vue-template-compiler": "^2.5.16"
+    "@vue/cli-plugin-babel": "^3.0.4",
+    "@vue/cli-service": "^3.0.4",
+    "vue-template-compiler": "^2.5.17"
   },
   "postcss": {
     "plugins": {
