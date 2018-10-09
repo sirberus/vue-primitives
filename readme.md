@@ -53,11 +53,11 @@ registerPrimitive(Vue, 'hr', 'bar', ['thick'])
 
 ## Notes on Props
 
-* `class` and `:class` work as expected, as do `style` and `:style`. *This is not how functional normally components work* - I wired it up myself
+* `class` and `:class` work as expected, as do `style` and `:style`. *(This is not true by default for functional components - it must be constructed from scratch)*
 
 * Other than class and style, only one other attr is special: `vp-debug`. Add this prop to any Vue Primitive and it will console log its context information on render.
 
-* **All other attrs become classes.** This is very useful with helper classes. You can also v-bind them to a boolean to toggle them as expected.
+* **All other attrs become classes.** Ex. `<box big>` will be a `box` with the additional class `big`. This is very useful with helper classes. You can also v-bind them to a boolean to toggle them as expected.
 
 ## Dev Setup
 
