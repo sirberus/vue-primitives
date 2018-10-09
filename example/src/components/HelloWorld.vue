@@ -1,20 +1,21 @@
 <template>
   <div style="width: 100%">
     
-    <p style="text-align: left; display: inline-block;">
-      This example shows off many of the things you need to know about <code>vue-primitives</code>:
-      <ol>
-        <li>'txt' and 'box' are available by default ('bar' is added in main.js)</li>
-        <li>class and :class meld as expected, as do style and :style (this is not true by default for functional components - it must be constructed from scratch)</li>
-        <li>attrs other than style and class are turned into classes if they have no value or if their value is Boolean true</li>
-        <li>the special prop 'vp-debug' causes the context to console log</li>
-      </ol>
-      Open HelloWorld.vue to explore further.
-    </p>
+    <card>
+      <p style="text-align: left; display: inline-block;">
+        This example shows off many of the things you need to know about <code>vue-primitives</code>:
+        <ol>
+          <li>class and :class meld as expected, as do style and :style (this is not true by default for functional components - it must be constructed from scratch)</li>
+          <li>attrs other than style and class are turned into classes if they have no value or if their value is Boolean true</li>
+          <li>the special prop 'vp-debug' causes the context to console log</li>
+        </ol>
+        Open HelloWorld.vue to explore further.
+      </p>
+    </card>
 
     <br>
     
-    <box elevated>
+    <box half-width>
 
       <txt mint 
         :class="['big']" class="italic" 
