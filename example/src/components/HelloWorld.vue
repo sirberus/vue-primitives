@@ -24,7 +24,7 @@
         Vue
       </txt>
 
-      <bar thick mint/>
+      <bar mint/>
 
       <txt big bold italic mint>
         Primitives
@@ -36,10 +36,17 @@
 </template>
 
 <script>
+import { createPrimitive } from 'vue-primitives'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  components: {
+    box :createPrimitive('div', 'box'),
+    txt :createPrimitive('span', 'txt'),
+    bar :createPrimitive('hr', 'bar', ['thick']),
   }
 }
 </script>

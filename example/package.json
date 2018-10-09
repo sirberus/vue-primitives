@@ -8,9 +8,7 @@
   },
   "dependencies": {
     "vue": "^2.5.16",
-    "vue-css": "0.0.2",
-    "vue-primitives": "^1.0.0",
-    "vuex": "^3.0.1"
+    "vue-primitives": "^1.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",
