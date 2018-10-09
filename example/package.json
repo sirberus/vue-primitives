@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "vue": "^2.5.17",
-    "vue-primitives": "^1.0.2"
+    "vue-primitives": "^1.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.4",
