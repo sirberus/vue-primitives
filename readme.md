@@ -22,17 +22,27 @@
 
 `npm install --save vue-primitives`
 
-#### To make a component:
+#### Make a component with `createPrimitive`:
 
 ```js
-import createPrimitive from 'vue-primitives'
+import { createPrimitive } from 'vue-primitives'
 
 createPrimitive('span', 'msg') // <span class="msg"> -> <msg>
 // Bake in additional classes
 createPrimitive('div', 'card', ['pa-sm-1', 'pa-md-3'])  // <div class="card pa-sm-1 pa-md-3"> -> <card>
 ```
 
-#### Globally register for best effect:
+#### Locally register:
+
+```js
+export default {
+  components: {
+    row: createPrimitive('div', 'row', ['flex', 'flex-direction-row']),
+  },
+}
+```
+
+#### Globally register with `registerPrimitive` for best effect:
 
 ```js
 import Vue from 'vue'
@@ -41,27 +51,13 @@ import { registerPrimitive } from 'vue-primatives'
 registerPrimitive(Vue, 'hr', 'bar', ['thick'])
 ```
 
-#### Locally register if you need to:
-
-```js
-import { createPrimitive } from 'vue-primitives'
-
-export default {
-  components: {
-    grid: createPrimitive('div', 'grid', ['flex', 'flex-direction-column']),
-    row: createPrimitive('div', 'row', ['flex', 'flex-direction-row']),
-    cell: createPrimitive('div', 'cell', ['flex', 'flex-center'])
-  },
-}
-```
-
 ## Notes on Props
 
 * `class` and `:class` work as expected, as do `style` and `:style`. *This is not how functional normally components work* - I wired it up myself
 
 * Other than class and style, only one other attr is special: `vp-debug`. Add this prop to any Vue Primitive and it will console log its context information on render.
 
-* All attrs except `class`, `style`, and `vp-debug` become classes - very useful with helper classes! You can also v-bind them to a boolean to toggle them as expected.
+* **All other attrs become classes.** This is very useful with helper classes. You can also v-bind them to a boolean to toggle them as expected.
 
 ## Dev Setup
 
