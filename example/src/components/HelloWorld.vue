@@ -44,9 +44,7 @@ export default {
     msg: String
   },
   components: {
-    box :createPrimitive('div', 'box'),
-    txt :createPrimitive('span', 'txt'),
-    bar :createPrimitive('hr', 'bar', ['thick']),
+    card: createPrimitive('div', 'card'),
   }
 }
 </script>
