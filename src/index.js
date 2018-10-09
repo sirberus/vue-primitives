@@ -1,7 +1,2 @@
-import {createPrimitive} from './componentFactory.js'
-import plugin from './plugin.js'
-
-export default {
-  createPrimitive,
-  plugin,
-}
+import { createPrimitive }  from './createPrimitive.js'
+export *  from './createPrimitive.js'
