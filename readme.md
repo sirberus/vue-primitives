@@ -4,7 +4,7 @@
 
 #### Before:
 ```
-<div class="card red elevated">
+<div class="card pa-sm-1 pa-md-3 red elevated">
   <span class="msg white big bold">Hello World</span>
 </div>
 ```
@@ -23,30 +23,23 @@
 In your main.js or in a Nuxt plugin:
 
 ```js
-import VuePrimitives from 'vue-primitives'
+import createPrimitive from 'vue-primitives'
 
-// Register the defaults
-VuePrimitives.plugin
-// Same as this:
-// VuePrimitives.createPrimitive('span', 'txt')
-// VuePrimitives.createPrimitive('div', 'box')
+createPrimitive('span', 'msg') // <span class="msg"> -> <msg>
 
-// Register a component of your own
-VuePrimitives.createPrimitive('div', 'card')
-VuePrimitives.createPrimitive('span', 'msg')
+// Bake in additional classes
+createPrimitive('div', 'card', ['pa-sm-1', 'pa-md-3'])  // <div class="card pa-sm-1 pa-md-3"> -> <card>
 ```
 
 ## Notes
 
-* These are functional components, so they won't show up in Vue dev tools and they are ultra lightweight.
+* These are *functional components*, so they won't show up in Vue dev tools (yet) and they are ultra lightweight.
 
-* `class` and `:class` merge as expected, as do `style` and `:style` - this is not how functional components work, I wired it up myself
+* `class` and `:class` work as expected, as do `style` and `:style`. *This is not how functional normally components work* - I wired it up myself
 
 * Other than class and style, only one other attr is special: `vp-debug`. Add this prop to any Vue Primitive and it will console log its context information on render.
 
-* All other attrs become classes
-
-* The name of the component also becomes a class
+* All attrs except `class`, `style`, and `vp-debug` become classes - very useful with helper classes! You can also v-bind them to a boolean to toggle them as expected.
 
 * The GitHub repo (see below) has a working example you can pull down
 
@@ -55,3 +48,17 @@ VuePrimitives.createPrimitive('span', 'msg')
 * Clone from GitHub repo (https://github.com/sirberus/vue-primitives)
 
 * In /example/, open a terminal, npm install, and npm run serve
+
+## ToDos:
+
+* Make attribute-to-class mapping toggleable.
+
+* Prop aliasing system. Supports a few use cases:
+  
+  * Prettify ugly helper classes, eg 'red' instead of 'text--red'
+
+  * Shortening, eg 'row' instead of 'display-flex flex-direction-row'
+
+  * Usable as baked-in suggestions and defaults, usable in auto-documentation
+
+* "Subclassing" - created primitives should contain a "subclasser" function that returns a new primitive with additional classes and a different name
