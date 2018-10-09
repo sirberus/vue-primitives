@@ -9,6 +9,24 @@ body.dark .txt {
   color: blue;
 }
 
+.card {
+  width: fit-content;
+  width: fit-content;
+  border: 1px solid rgba(0,0,0,0.1);
+  margin: auto;
+  padding: 0.5em 2em;
+  box-shadow: 0px 2px 3px 0px;
+}
+
+.box {
+  margin: auto;
+  border: 4px ridge rgba(0,0,0,0.2);
+}
+
+.half-width {
+  width: 50%;
+}
+
 /*!
   Helpers
 */
