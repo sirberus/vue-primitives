@@ -1,4 +1,4 @@
-export function componentFactory(oldTag, newTag) {
+export function createPrimitive(oldTag, newTag, bakeInClasses=[]) {
   return {
     functional: true,
     name: newTag,
@@ -29,7 +29,7 @@ export function componentFactory(oldTag, newTag) {
       // Resolve staticClasses into mappedClasses
       mappedClasses.push(staticClasses)
       
-      // Resolve classes
+      // Resolve mappedClasses into classes
       switch (classes.__proto__.constructor) {
         case Array:
           classes = classes.concat(mappedClasses)
@@ -39,17 +39,17 @@ export function componentFactory(oldTag, newTag) {
           classes = mappedClasses
           break
         case Object:
-          for (let c of mappedClasses) {
-            classes[c] = true
+          for (let [cls, bool] of Object.entries(classes)) {
+            if (bool) mappedClasses.push(cls)
+            classes = mappedClasses
           }
           break
       }
 
+      // Respolve bakeInClasses into classes
+      classes = classes.concat(bakeInClasses)
+
       return h(oldTag, {class: classes, style: context.data.style, staticStyle: context.data.staticStyle}, context.children)
     },
   }
-}
-
-export function createPrimitive(Vue, tag, name) {
-  Vue.component(name, componentFactory(tag, name))
 }
