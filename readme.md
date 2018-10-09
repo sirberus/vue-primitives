@@ -36,10 +36,9 @@ createPrimitive('div', 'card', ['pa-sm-1', 'pa-md-3'])  // <div class="card pa-s
 
 ```js
 import Vue from 'vue'
-import { createPrimitive } from 'vue-primatives'
+import { registerPrimitive } from 'vue-primatives'
 
-createPrimitive
-Vue.component()
+registerPrimitive(Vue, 'hr', 'bar', ['thick'])
 ```
 
 #### Locally register if you need to:
