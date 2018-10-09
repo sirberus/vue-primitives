@@ -20,15 +20,36 @@
 
 `npm install --save vue-primitives`
 
-In your main.js or in a Nuxt plugin:
+To make a component:
 
 ```js
 import createPrimitive from 'vue-primitives'
 
 createPrimitive('span', 'msg') // <span class="msg"> -> <msg>
-
 // Bake in additional classes
 createPrimitive('div', 'card', ['pa-sm-1', 'pa-md-3'])  // <div class="card pa-sm-1 pa-md-3"> -> <card>
+```
+
+Full example:
+
+```html
+<grid>
+  <row v-for="j in 3" :key="j">
+    <cell v-for="i in 3" :key="i-j" v-text="i+j"/>
+  </row>
+</grid>
+```
+
+```js
+import { createPrimitive } from 'vue-primitives'
+
+export default {
+  components: {
+    grid: createPrimitive('div', 'grid', ['flex', 'flex-direction-column']),
+    row: createPrimitive('div', 'row', ['flex', 'flex-direction-row']),
+    cell: createPrimitive('div', 'cell', ['flex', 'flex-center'])
+  },
+}
 ```
 
 ## Notes
