@@ -16,11 +16,13 @@
 </card>
 ```
 
+> They're also functional components so they're super performant!
+
 ## Getting Started
 
 `npm install --save vue-primitives`
 
-To make a component:
+#### To make a component:
 
 ```js
 import createPrimitive from 'vue-primitives'
@@ -30,15 +32,17 @@ createPrimitive('span', 'msg') // <span class="msg"> -> <msg>
 createPrimitive('div', 'card', ['pa-sm-1', 'pa-md-3'])  // <div class="card pa-sm-1 pa-md-3"> -> <card>
 ```
 
-Full example:
+#### Globally register for best effect:
 
-```html
-<grid>
-  <row v-for="j in 3" :key="j">
-    <cell v-for="i in 3" :key="i-j" v-text="i+j"/>
-  </row>
-</grid>
+```js
+import Vue from 'vue'
+import { createPrimitive } from 'vue-primatives'
+
+createPrimitive
+Vue.component()
 ```
+
+#### Locally register if you need to:
 
 ```js
 import { createPrimitive } from 'vue-primitives'
@@ -52,9 +56,7 @@ export default {
 }
 ```
 
-## Notes
-
-* These are *functional components*, so they won't show up in Vue dev tools (yet) and they are ultra lightweight.
+## Notes on Props
 
 * `class` and `:class` work as expected, as do `style` and `:style`. *This is not how functional normally components work* - I wired it up myself
 
@@ -62,9 +64,9 @@ export default {
 
 * All attrs except `class`, `style`, and `vp-debug` become classes - very useful with helper classes! You can also v-bind them to a boolean to toggle them as expected.
 
-* The GitHub repo (see below) has a working example you can pull down
-
 ## Dev Setup
+
+The GitHub repo has a working example you can pull down.
 
 * Clone from GitHub repo (https://github.com/sirberus/vue-primitives)
 
