@@ -2,29 +2,33 @@
   <div style="width: 100%">
     
     <card>
-      <p style="text-align: left; display: inline-block;">
+      <p style="text-align: left; display: inline-block;"><txt>
         This example shows off many of the things you need to know about <code>vue-primitives</code>.<br>
         Open HelloWorld.vue to explore further.
-      </p>
+      </txt></p>
     </card>
 
     <br>
+
+    <btn mb-3 @click="$store.commit('toggle-dark')">
+      {{ $store.getters.dark ? 'Dark' : 'Light' }} (Click to toggle)
+    </btn>
     
     <box half-width>
 
-      <txt mint 
+      <headline mint 
         :class="['big']" class="italic" 
         style="text-decoration: orange underline;" :style="{'font-weight': 'bold'}" 
         vp-debug
       >
         Vue
-      </txt>
+      </headline>
 
       <bar mint/>
 
-      <txt big bold italic mint>
+      <headline big bold italic mint>
         Primitives
-      </txt>
+      </headline>
 
     </box>
 

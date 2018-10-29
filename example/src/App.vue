@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{dark:$store.getters.dark}">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -16,12 +16,23 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding-top: 60px;
+  height: 100vh;
+  width: 100vw;
+}
+.dark {
+  background: #222;
 }
 </style>

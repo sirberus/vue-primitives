@@ -1,42 +1,51 @@
-export function mergeClasses(context, newTag, bakeInClasses) {
-  let classes = context.data.class ? context.data.class : []
-  let staticClasses = context.data.staticClass ? context.data.staticClass : ''
-  let mappedClasses = [newTag]
+export function mergeClasses(context, newTag, options) {
+  const store = context.parent.$store || {}
+  const boundClasses = context.data.class || ''
+  const staticClasses = context.data.staticClass ? context.data.staticClass : ''
+  let allClasses = [newTag, staticClasses]
   
-  // Map attrs to mappedClasses
+  // Handle options polymorphism
+  let bakeInClasses
+  if (Array.isArray(options)) {
+    allClasses = allClasses.concat(options)
+    options = {}  
+  } else {
+    allClasses = allClasses.concat(options.classes || [])  
+  }
+
+  let conditionals = options.conditionals || []
+  for (let conditional of conditionals) {
+    let output = conditional({context, store, newTag, options})
+    if (output) allClasses.push(output)
+  }
+
+  // Map attrs to allClasses
   if (context.data.attrs) {
     for (let [k, v] of Object.entries(context.data.attrs)) {
       if (typeof(v) == 'boolean') {
-        if (v) mappedClasses.push(k)
+        if (v) allClasses.push(k)
       } else if (!v) {
-        mappedClasses.push(k)
+        allClasses.push(k)
       }
     }
   }
 
-  // Resolve staticClasses into mappedClasses
-  mappedClasses.push(staticClasses)
-  
-  // Resolve mappedClasses into classes
-  switch (classes.__proto__.constructor) {
+  // Resolve allClasses into classes
+  switch (boundClasses.__proto__.constructor) {
     case Array:
-      classes = classes.concat(mappedClasses)
+      allClasses = allClasses.concat(boundClasses)
       break
     case String:
-      mappedClasses.push(classes)
-      classes = mappedClasses
+      allClasses.push(boundClasses)
       break
     case Object:
-      for (let [cls, bool] of Object.entries(classes)) {
-        if (bool) mappedClasses.push(cls)
-        classes = mappedClasses
+      for (let [cssClass, bool] of Object.entries(boundClasses)) {
+        if (bool) allClasses.push(cssClass)
       }
       break
   }
 
-  // Respolve bakeInClasses into classes
-  classes = classes.concat(bakeInClasses)
-  return classes
+  return allClasses
 }
 
 export default {}
