@@ -13,12 +13,6 @@ export function mergeClasses(context, newTag, options) {
     allClasses = allClasses.concat(options.classes || [])  
   }
 
-  let conditionals = options.conditionals || []
-  for (let conditional of conditionals) {
-    let output = conditional({context, store, newTag, options})
-    if (output) allClasses.push(output)
-  }
-
   // Map attrs to allClasses
   if (context.data.attrs) {
     for (let [k, v] of Object.entries(context.data.attrs)) {
@@ -43,6 +37,12 @@ export function mergeClasses(context, newTag, options) {
         if (bool) allClasses.push(cssClass)
       }
       break
+  }
+
+  let conditionals = options.conditionals || []
+  for (let conditional of conditionals) {
+    let output = conditional({context, store, newTag, options, classes: allClasses})
+    if (output) allClasses.push(output)
   }
 
   return allClasses
