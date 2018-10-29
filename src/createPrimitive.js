@@ -1,4 +1,7 @@
-export default function createPrimitive(oldTag, newTag, bakeInClasses=[]) {
+export default function createPrimitive(oldTag, newTag, options={}) {
+
+  let bakeInClasses = options.bakeInClasses || []
+
   return {
     functional: true,
     name: newTag,
