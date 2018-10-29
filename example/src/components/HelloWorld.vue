@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import { createPrimitive } from 'vue-primitives'
+// import { createPrimitive } from 'vue-primitives'
+import { createPrimitive } from '../../../src/index.js'
 
 export default {
   name: 'HelloWorld',
