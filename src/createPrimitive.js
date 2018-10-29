@@ -1,6 +1,15 @@
+import { mergeClasses } from './utils.js'
+
 export default function createPrimitive(oldTag, newTag, options={}) {
 
-  let bakeInClasses = options.bakeInClasses || []
+  let bakeInClasses
+  if (Array.isArray(options)) {
+    bakeInClasses = options
+    options = {}  
+  } else {
+    bakeInClasses = options.classes || []  
+  }
+  let conditions = options.conditions || []
 
   return {
     functional: true,
@@ -14,45 +23,12 @@ export default function createPrimitive(oldTag, newTag, options={}) {
         console.log(context)
       }
       
-      let classes = context.data.class ? context.data.class : []
-      let staticClasses = context.data.staticClass ? context.data.staticClass : ''
-      let mappedClasses = [newTag]
-      
-      // Map attrs to mappedClasses
-      if (context.data.attrs) {
-        for (let [k, v] of Object.entries(context.data.attrs)) {
-          if (typeof(v) == 'boolean') {
-            if (v) mappedClasses.push(k)
-          } else if (!v) {
-            mappedClasses.push(k)
-          }
-        }
-      }
+      const data = Object.assign({}, 
+        context.data, 
+        {class: mergeClasses(context, newTag, bakeInClasses)}
+      )
 
-      // Resolve staticClasses into mappedClasses
-      mappedClasses.push(staticClasses)
-      
-      // Resolve mappedClasses into classes
-      switch (classes.__proto__.constructor) {
-        case Array:
-          classes = classes.concat(mappedClasses)
-          break
-        case String:
-          mappedClasses.push(classes)
-          classes = mappedClasses
-          break
-        case Object:
-          for (let [cls, bool] of Object.entries(classes)) {
-            if (bool) mappedClasses.push(cls)
-            classes = mappedClasses
-          }
-          break
-      }
-
-      // Respolve bakeInClasses into classes
-      classes = classes.concat(bakeInClasses)
-
-      return h(oldTag, {class: classes, style: context.data.style, staticStyle: context.data.staticStyle}, context.children)
+      return h(oldTag, data, context.children)
     },
   }
 }
