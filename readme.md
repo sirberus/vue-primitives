@@ -46,10 +46,25 @@ export default {
 
 ```js
 import Vue from 'vue'
-import { registerPrimitive } from 'vue-primatives'
+import { registerPrimitive } from 'vue-primitives'
 
 registerPrimitive(Vue, 'hr', 'bar', ['thick'])
 ```
+
+#### Conditionally apply classes:
+
+```js
+import Vue from 'vue'
+import { registerPrimitive } from 'vue-primitives'
+
+registerPrimitive(Vue, 'div', 'frame', {
+  conditionals: [
+    ({store}) => store.getters.darkMode ? 'white-text white-border' : 'black-text black-border' 
+  ]
+})
+```
+
+> The data passed into each conditional is an object `{context, store, newTag, options, classes}` where `context` is the render context of a Vue render function, `store` is a helper to access the Vuex store if present, `newTag` is the target name for the new primitive, `options` is the final argument passed to registerPrimitive or createPrimitive, and `classes` is a list of all classes to be applied to the primitive so far.
 
 ## Notes on Props
 
