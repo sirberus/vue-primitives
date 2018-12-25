@@ -5,11 +5,12 @@ export function mergeClasses(context, newTag, options) {
   let allClasses = [newTag, staticClasses]
   
   // Handle options polymorphism
-  let bakeInClasses
-  if (Array.isArray(options)) {
+  if (typeof options === 'string') {
+    allClasses = allClasses.push(options)  
+  } else if (Array.isArray(options)) {
     allClasses = allClasses.concat(options)
     options = {}  
-  } else {
+  }  else {
     allClasses = allClasses.concat(options.classes || [])  
   }
 
@@ -47,5 +48,9 @@ export function mergeClasses(context, newTag, options) {
 
   return allClasses
 }
+
+export function kebabCase(string) {
+  return string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+} 
 
 export default {}

@@ -1,5 +1,5 @@
 import cp  from './createPrimitive.js'
-import rp from './registerPrimitive.js'
+import cps from './primitives.js'
 
 export const createPrimitive = cp
-export const registerPrimitive = rp
+export const primitives = cps
