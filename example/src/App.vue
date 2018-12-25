@@ -1,38 +1,37 @@
 <template>
-  <div id="app" :class="{dark:$store.getters.dark}">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <app-wrapper>
+    <app-header>
+      <app-title>Vue Primitives</app-title>
+    </app-header>
+    <app-content/>
+  </app-wrapper>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { primitives } from '../../src/index.js'
+import AppContent from './components/AppContent.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ...primitives({
+      AppWrapper: { 
+        tag: 'div', 
+        classes: 'min-h-screen',
+        conditionals: [
+          ({store}) => store.getters.dark ? 'bg-black' : 'bg-white'
+        ]
+      },
+      AppHeader: { tag: 'div', classes: 'bg-green h-16 flex items-center md:pl-10' },
+      AppTitle: { 
+        tag: 'span', 
+        classes: 'font-bold text-3xl',
+        conditionals: [
+          ({store}) => store.getters.dark ? 'text-black' : 'text-white'
+        ]  
+      }
+    }),
+    AppContent
   }
 }
 </script>
-
-<style>
-body {
-  margin: 0;
-}
-* {
-  box-sizing: border-box;
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  padding-top: 60px;
-  height: 100vh;
-  width: 100vw;
-}
-.dark {
-  background: #222;
-}
-</style>
