@@ -26,27 +26,8 @@
 
 `npm install --save vue-primitives`
 
-## Creating Primitives
 
-#### Register individually with createPrimitive():
-```js
-import { createPrimitive } from 'vue-primitives'
-
-export default {
-  components: {
-    Message: createPrimitive({ tag: 'span', name: 'Message' }),
-    Card: createPrimitive({ tag: 'div', name: 'Card', classes: 'bg-red' })
-  }
-}
-// Before: <span class="message"> <div class="card bg-red">
-// After:  <message>
-```
-
-> **Names are converted to kebab case** so use PascalCase or kebab-case or whatever you prefer
-
-#### [Recommended] Register as a batch with `...primitives()`:
-
-> Note that the name is external the Object.
+#### Register locally with primitives():
 
 ```js
 import { primitives } from 'vue-primitives'
@@ -60,6 +41,23 @@ export default {
   }
 }
 ```
+
+#### Register globally with registerPrimitives:
+
+```js
+import { primitives } from 'vue-primitives'
+
+export default {
+  components: {
+    ...primitives({
+      Message: { tag: 'span' },
+      Card: { tag: 'div', classes: 'bg-red' },
+    }),
+  }
+}
+```
+
+## Features
 
 #### Bake in additional classes:
 ```js
@@ -97,7 +95,7 @@ createPrimitive({
 })
 ```
 
-## Using Primitives
+## Usage
 
 #### Unknown attrs without values become classes
 
