@@ -1,5 +1,3 @@
-import cp  from './createPrimitive.js'
-import cps from './primitives.js'
-
-export const createPrimitive = cp
-export const primitives = cps
+export { default as createPrimitive }  from './createPrimitive.js'
+export { default as registerPrimitives }  from './registerPrimitives.js'
+export { default as primitives} from './primitives.js'
